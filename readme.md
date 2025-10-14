@@ -35,6 +35,8 @@ Exemplo:
 ├── 📄 README.md          # Este arquivo
 └── 📄 LICENSE            # Licença (MIT, Apache, etc.)
 
+```
+
 ## ⚙️ Tecnologias Utilizadas
 
 | Categoria | Tecnologia / Ferramenta |
