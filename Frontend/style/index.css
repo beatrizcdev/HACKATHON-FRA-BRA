@@ -1,0 +1,42 @@
+.index_body {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  background: linear-gradient(rgba(215, 11, 11, 0.8), rgba(113, 6, 6, 0.8)),
+    url("../pictures/index_back_image.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.index_info,
+.index_logotipo {
+  align-content: center;
+  margin: 2%;
+}
+
+.index_form{
+    background-color: white;
+    padding: 40px;
+    border-radius: 5px;
+}
+
+.index_form_space{
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.index_form_space label{
+    font-weight: 300;
+    font-size: 15px;
+    margin: 10px 0px;
+}
+
+.index_form_space input{
+    background-color: white;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+    padding: 5px;
+}

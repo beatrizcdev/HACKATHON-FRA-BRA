@@ -1,0 +1,132 @@
+{
+  "usuarios": [
+    {
+      "id": 201,
+      "nome": "Mariana Silva",
+      "cpf": "123.456.789-00",
+      "email": "mariana.silva@example.com",
+      "telefone": "(11) 98765-4321",
+      "ocupacao": "Arquiteta",
+      "cep": "01001-000",
+      "tipo": "geral",
+      "criadoEm": "2025-10-16T09:00:00.000Z"
+    },
+    {
+      "id": 202,
+      "nome": "Paulo Costa",
+      "cpf": "234.567.890-11",
+      "email": "paulo.costa@invest.com",
+      "telefone": "(11) 91234-5678",
+      "ocupacao": "Investidor Privado",
+      "cep": "02002-000",
+      "tipo": "investidor",
+      "criadoEm": "2025-10-16T09:30:00.000Z"
+    },
+    {
+      "id": 203,
+      "nome": "Ana Pereira",
+      "cpf": "345.678.901-22",
+      "email": "ana.pereira@example.com",
+      "telefone": "(11) 99876-5432",
+      "ocupacao": "Professora",
+      "cep": "03003-000",
+      "tipo": "geral",
+      "criadoEm": "2025-10-16T10:00:00.000Z"
+    },
+    {
+      "id": 204,
+      "nome": "Roberto Lima",
+      "cpf": "456.789.012-33",
+      "email": "roberto.lima@grupo.com",
+      "telefone": "(11) 91111-2222",
+      "ocupacao": "Empresário",
+      "cep": "04004-000",
+      "tipo": "investidor",
+      "criadoEm": "2025-10-16T10:30:00.000Z"
+    }
+  ],
+  "edificios": [
+    {
+      "id": 301,
+      "lote": "Lote A-12",
+      "area": 450.5,
+      "qte_pav": 3,
+      "ociosidade": 0.35,
+      "zona": "central",
+      "criadoEm": "2025-10-16T08:45:00.000Z"
+    },
+    {
+      "id": 302,
+      "lote": "Lote B-07",
+      "area": 1200,
+      "qte_pav": 5,
+      "ociosidade": 0.12,
+      "zona": "industrial",
+      "criadoEm": "2025-10-16T08:50:00.000Z"
+    },
+    {
+      "id": 303,
+      "lote": "Lote C-03",
+      "area": 220,
+      "qte_pav": 2,
+      "ociosidade": 0.6,
+      "zona": "residencial",
+      "criadoEm": "2025-10-16T09:15:00.000Z"
+    }
+  ],
+  "propostas": [
+    {
+      "id_proposta": 1001,
+      "usos": "Centro cultural e biblioteca comunitária",
+      "contrapartida": "Manutenção com envolvimento de voluntariado local",
+      "fachada_ativa": true,
+      "publico": "geral",
+      "tombamento": false,
+      "usuarioId": 201,
+      "criadoEm": "2025-10-16T10:00:00.000Z"
+    },
+    {
+      "id_proposta": 1002,
+      "usos": "Espaço de coworking para microempreendedores",
+      "contrapartida": "Cursos e formação gratuita",
+      "fachada_ativa": false,
+      "publico": "geral",
+      "tombamento": false,
+      "usuarioId": 202,
+      "criadoEm": "2025-10-16T11:15:00.000Z"
+    },
+    {
+      "id_proposta": 1003,
+      "usos": "Sede administrativa para órgão municipal",
+      "contrapartida": "Melhoria de serviços públicos locais",
+      "fachada_ativa": true,
+      "publico": "governo",
+      "tombamento": true,
+      "usuarioId": 204,
+      "criadoEm": "2025-10-16T12:30:00.000Z"
+    }
+  ],
+  "propostasGerais": [
+    {
+      "id_proposta": 1001,
+      "usos": "Centro cultural e biblioteca comunitária",
+      "contrapartida": "Manutenção com envolvimento de voluntariado local",
+      "fachada_ativa": true,
+      "publico": "geral",
+      "tombamento": false,
+      "usuarioId": 201,
+      "criadoEm": "2025-10-16T10:00:00.000Z"
+    },
+    {
+      "id_proposta": 1002,
+      "usos": "Espaço de coworking para microempreendedores",
+      "contrapartida": "Cursos e formação gratuita",
+      "fachada_ativa": false,
+      "publico": "geral",
+      "tombamento": false,
+      "usuarioId": 202,
+      "criadoEm": "2025-10-16T11:15:00.000Z"
+    }
+  ],
+  "comentarios": []
+}

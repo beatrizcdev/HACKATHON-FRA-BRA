@@ -1,0 +1,10 @@
+/*
+Aqui vai todos os caminhos das páginas separadas, usar nomeclatura padrão nas classes exemplo:
+class = "landpage_main"
+*/
+
+@import url('/Frontend//style/homepage.css');
+@import url('/Frontend//style/global.css');
+@import url('/Frontend//style/footer.css');
+@import url('/Frontend//style/header.css');
+@import url('/Frontend//style/index.css');
