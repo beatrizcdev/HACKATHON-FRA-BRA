@@ -7,7 +7,40 @@
     <link rel="stylesheet" href="/Frontend/style.css" />
   </head>
   <body class="homepage_body">
-    <header></header>
+    <header
+      class="site_header"
+      style="
+        display: flex;
+        align-items: center;
+        gap: 60px;
+        padding: 12px 18px;
+      "
+    >
+      <a href="../index.html" class="logo_link" aria-label="Início">
+        <img
+          src="../pictures/logotipo.svg"
+          alt="logotipo"
+          style="height: 36px;
+          padding: 10px;
+          "
+        />
+      </a>
+      <a class="botoesHeader" href="./homepage_investor.html">Benefícios</a>
+      <a class="botoesHeader" href="./proposta.html">Propostas</a>
+      <div id="div-perfil">
+        <nav>
+        <a
+          href="investidor_perfil.html"
+          class="header_profile_button"
+        >
+          <img id="foto-perfil" src="../pictures/perfil.png" alt="" 
+          style="
+          height: 30px;">
+        </a>
+      </nav>
+      </div>
+    </header>
+
     <img
       class="homepage_logotipo"
       src="/Frontend/pictures/logotipo.svg"
