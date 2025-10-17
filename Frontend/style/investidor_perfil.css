@@ -104,9 +104,11 @@
   color: #251c00;
   border: 1px solid #d9b64c;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .investidorperfil_btn_detalhes:hover{
   background-color: #edc16ae2;
+  text-decoration: none;
 }
 

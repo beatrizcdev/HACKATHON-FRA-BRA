@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Perfil</title>
+    <title>Detalhes Proposta</title>
     <link rel="stylesheet" href="../style.css">
   </head>
   <body class="investidorperfil_body">
@@ -26,7 +26,7 @@
         />
       </a>
       <a class="botoesHeader" href="./homepage_investor.html">Benefícios</a>
-      <a class="botoesHeader" href="./proposta.html">Propostas</a>
+      <a class="botoesHeader" href="./investidor_perfil.html">Propostas</a>
       <div id="div-perfil">
         <nav>
         <a
@@ -42,39 +42,27 @@
     </header>
 
     <main class="investidorperfil_conteudo">
-      <section class="investidorperfil_header">
-        <h1 class="investidorperfil_nome">Beatriz Castro</h1>
-        <p class="investidorperfil_email">beatriz.castro@email.com</p>
-      </section>
 
       <section class="investidorperfil_lista">
-        <h2>Minhas Propostas</h2>
+        <h2>Retrofit Edifício Atlântico</h2>
 
         <div class="investidorperfil_proposta">
           <div class="investidorperfil_proposta_info">
             <div class="investidorperfil_proposta_titulo">
-              Retrofit Edifício Atlântico
+             <h3>Engajamento dos residêntes locais:</h3>
             </div>
-            <div class="investidorperfil_proposta_detalhes">
-              Boa Viagem — 800m² — Lucro estimado: R$ 1.200.000
-            </div>
+            <!-- <div class="investidorperfil_proposta_detalhes"> -->
+                30 Apoiadores
+            <!-- </div> -->
+            <h3>Localização:</h3>
+            Cerca de 60% vivem a 10km
           </div>
-           <a href="../pages/detalhesPropsota.html" class="investidorperfil_btn_detalhes">Ver detalhes</a>
         </div>
 
-        <div class="investidorperfil_proposta">
-          <div class="investidorperfil_proposta_info">
-            <div class="investidorperfil_proposta_titulo">
-              Edifício São Miguel
-            </div>
-            <div class="investidorperfil_proposta_detalhes">
-              Santo Antônio — 500m² — Lucro estimado: R$ 750.000
-            </div>
-          </div>
-           <a href="../pages/detalhesPropsota.html" class="investidorperfil_btn_detalhes">Ver detalhes</a>
-        </div>
-      </section>
 
+      <div class="investidorperfil_relatorio">
+        <button onclick="gerarRelatorio()">📄 Gerar Relatório</button>
+      </div>
     </main>
 
     <script>
