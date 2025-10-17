@@ -3,9 +3,14 @@
   flex-direction: column;
   align-items: center;
 }
-
+/* CORES 
+-D3BC8F-amarelo
+-A97B86-vermelho
+-3388DD-azul
+*/
 .homepage_logotipo {
   margin-top: 40px;
+  height: 10vh;
 }
 
 .homepage_options {
@@ -59,7 +64,7 @@ button {
 }
 
 .homepage_lista h2{
-  background-color: #C50023;
+  background-color: #A97B86;
   width: 200px;
   color: white;
   font-size: 20px;
@@ -72,7 +77,7 @@ button {
 
 .homepage_lista_produtos{
   width: 90%;
-  background-color: #C50023;
+  background-color: #A97B86;
   border-radius: 0px 10px 10px 10px;
   padding: 8px 10px 10px 0px;
 }
