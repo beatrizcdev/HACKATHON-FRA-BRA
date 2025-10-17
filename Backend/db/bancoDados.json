@@ -104,6 +104,16 @@
       "tombamento": true,
       "usuarioId": 204,
       "criadoEm": "2025-10-16T12:30:00.000Z"
+    },
+    {
+      "id_proposta": 1760666343445,
+      "usos": "aaaaaaa",
+      "contrapartida": "aaaaaa",
+      "fachada_ativa": true,
+      "publico": "geral",
+      "tombamento": false,
+      "usuarioId": null,
+      "criadoEm": "2025-10-17T01:59:03.445Z"
     }
   ],
   "propostasGerais": [
@@ -126,6 +136,16 @@
       "tombamento": false,
       "usuarioId": 202,
       "criadoEm": "2025-10-16T11:15:00.000Z"
+    },
+    {
+      "id_proposta": 1760666343445,
+      "usos": "aaaaaaa",
+      "contrapartida": "aaaaaa",
+      "fachada_ativa": true,
+      "publico": "geral",
+      "tombamento": false,
+      "usuarioId": null,
+      "criadoEm": "2025-10-17T01:59:03.445Z"
     }
   ],
   "comentarios": []
