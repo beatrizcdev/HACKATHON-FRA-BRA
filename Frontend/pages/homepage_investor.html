@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Homepage_investidor</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body class="investidor_body">
+    <header
+      class="site_header"
+      style="
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 12px 18px;
+      "
+    >
+      <a href="../index.html" class="logo_link" aria-label="Início">
+        <img
+          src="../pictures/logotipo.svg"
+          alt="logotipo"
+          style="height: 36px"
+        />
+      </a>
+      <nav>
+        <a
+          href="investidor_perfil.html"
+          class="header_profile_button"
+          style="
+            padding: 8px 12px;
+            border-radius: 6px;
+            border: 1px solid #222;
+            background: #fff;
+            text-decoration: none;
+            color: #000;
+          "
+        >
+          Perfil
+        </a>
+      </nav>
+    </header>
+
+    <main class="investidor_conteudo">
+      <h1 class="investidor_titulo">Edital de Retrofit — Invista e Lucre</h1>
+      <p class="investidor_descricao">
+        O programa <strong>Centro Vivo</strong> incentiva a revitalização urbana
+        em áreas como <strong>Boa Viagem</strong> e Santo Antônio. Ao investir
+        em retrofit, você recebe benefícios fiscais, valorização imobiliária e
+        retorno econômico sustentável.
+      </p>
+
+      <section class="investidor_beneficios">
+        <div class="investidor_beneficio">
+          Isenção de IPTU e incentivos fiscais
+        </div>
+        <div class="investidor_beneficio">
+          Aproveitamento máximo do potencial construtivo
+        </div>
+        <div class="investidor_beneficio">
+          Acesso facilitado a linhas de crédito e programas públicos
+        </div>
+        <div class="investidor_beneficio">
+          Aumento direto no valor de mercado do imóvel
+        </div>
+      </section>
+
+      <section class="investidor_calculadora">
+        <h2>Calcule seu Lucro Potencial</h2>
+        <form class="investidor_form" id="formLucro">
+          <label for="area">Área do edifício (m²):</label>
+          <input type="number" id="area" placeholder="Ex: 500" />
+
+          <label for="zona">Zona de investimento:</label>
+          <select id="zona">
+            <option value="boa_viagem">Boa Viagem</option>
+            <option value="santo_antonio">Santo Antônio</option>
+          </select>
+
+          <button type="button" onclick="calcularLucro()">Calcular</button>
+        </form>
+
+        <div
+          id="resultado"
+          class="investidor_resultado"
+          style="display: none"
+        ></div>
+      </section>
+
+      <!-- NOVO: botão para inserir proposta -->
+      <section style="margin-top: 24px">
+        <button
+          id="btnAddProposta"
+          style="padding: 10px 14px; border-radius: 6px; cursor: pointer"
+        >
+          Adicionar Proposta
+        </button>
+      </section>
+    </main>
+
+    <script>
+      function calcularLucro() {
+        const area = Number(document.getElementById("area").value);
+        const zona = document.getElementById("zona").value;
+        let valor_m2 = zona === "boa_viagem" ? 12000 : 9000; // exemplo
+
+        if (!area) {
+          alert("Informe a área do edifício!");
+          return;
+        }
+
+        const lucro = area * valor_m2 * 0.2; // supõe 20% de rentabilidade
+        const potencial = area * 1.5; // aumento do potencial construtivo
+
+        document.getElementById("resultado").style.display = "block";
+        document.getElementById("resultado").innerHTML = `
+        💰 Lucro estimado: <strong>R$ ${lucro.toLocaleString()}</strong><br>
+        🏗️ Potencial construtivo: <strong>${potencial.toLocaleString()} m²</strong>
+      `;
+      }
+
+      // Modal de inserir proposta
+      (function () {
+        const API_BASE = "http://localhost:3000"; // ajuste se necessário
+        const btn = document.getElementById("btnAddProposta");
+        if (!btn) return;
+
+        btn.addEventListener("click", openFormModal);
+
+        function openFormModal() {
+          const overlay = document.createElement("div");
+          overlay.style =
+            "position:fixed;inset:0;background:rgba(0,0,0,0.45);display:flex;align-items:center;justify-content:center;z-index:9999;";
+          overlay.addEventListener("click", (e) => {
+            if (e.target === overlay) overlay.remove();
+          });
+
+          const box = document.createElement("div");
+          box.style =
+            "background:#fff;padding:18px;border-radius:8px;max-width:520px;width:94%;box-shadow:0 8px 30px rgba(0,0,0,0.2);max-height:90vh;overflow:auto;";
+          box.innerHTML = `
+          <button id="closeForm" aria-label="Fechar" style="float:right;border:none;background:none;font-size:18px;cursor:pointer;">✕</button>
+          <h2 style="margin-top:0">Nova Proposta</h2>
+          <form id="formProposta" style="display:flex;flex-direction:column;gap:8px;">
+            <label>Usos (título)</label>
+            <input name="usos" type="text" required placeholder="Ex: Centro cultural e biblioteca">
+            <label>Contrapartida</label>
+            <textarea name="contrapartida" rows="3" placeholder="Descreva a contrapartida" required></textarea>
+            <label>Fachada ativa</label>
+            <input type="checkbox" name="fachada_ativa">
+            <label>Tombamento</label>
+            <input type="checkbox" name="tombamento">
+            <label>Público</label>
+            <select name="publico" required>
+              <option value="">-- selecione --</option>
+              <option value="geral">Geral</option>
+              <option value="governo">Governo</option>
+            </select>
+            <label>Usuário (id) — opcional</label>
+            <input name="usuarioId" type="number" placeholder="Id do usuário (se aplicável)">
+            <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:8px;">
+              <button type="button" id="cancelForm" style="padding:8px 12px;">Cancelar</button>
+              <button type="submit" style="padding:8px 12px;">Salvar</button>
+            </div>
+          </form>
+        `;
+          overlay.appendChild(box);
+          document.body.appendChild(overlay);
+
+          box
+            .querySelector("#closeForm")
+            .addEventListener("click", () => overlay.remove());
+          box
+            .querySelector("#cancelForm")
+            .addEventListener("click", () => overlay.remove());
+
+          const form = box.querySelector("#formProposta");
+          form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const formData = new FormData(form);
+            const usos = String(formData.get("usos") || "").trim();
+            const contrapartida = String(
+              formData.get("contrapartida") || ""
+            ).trim();
+            const fachada_ativa =
+              formData.get("fachada_ativa") === "on" ||
+              form.querySelector('[name="fachada_ativa"]').checked;
+            const tombamento =
+              formData.get("tombamento") === "on" ||
+              form.querySelector('[name="tombamento"]').checked;
+            const publico = String(formData.get("publico") || "").toLowerCase();
+            const usuarioIdRaw = formData.get("usuarioId");
+            const usuarioId = usuarioIdRaw ? Number(usuarioIdRaw) : null;
+
+            if (!usos) {
+              alert('Campo "Usos" obrigatório');
+              return;
+            }
+            if (!["geral", "governo"].includes(publico)) {
+              alert("Selecione um público válido");
+              return;
+            }
+
+            const payload = {
+              usos,
+              contrapartida,
+              fachada_ativa: Boolean(fachada_ativa),
+              publico,
+              tombamento: Boolean(tombamento),
+              usuarioId,
+            };
+
+            try {
+              const resp = await fetch(`${API_BASE}/propostas`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload),
+              });
+              if (resp.ok) {
+                alert("Proposta enviada com sucesso");
+                overlay.remove();
+              } else {
+                const err = await resp.json().catch(() => null);
+                alert(
+                  "Erro ao enviar proposta: " +
+                    (err && err.error ? err.error : resp.statusText)
+                );
+              }
+            } catch (err) {
+              console.error(err);
+              alert("Erro de conexão ao enviar proposta");
+            }
+          });
+        }
+      })();
+    </script>
+  </body>
+</html>
