@@ -65,7 +65,6 @@ document.addEventListener("DOMContentLoaded", () => {
       <p><strong>Fachada ativa:</strong> ${fachada}</p>
       <p><strong>Tombamento:</strong> ${tomb}</p>
       <p><strong>Criado em:</strong> ${criadoEm}</p>
-      <p><strong>Usuário (id):</strong> ${escapeHtml(String(usuarioId))}</p>
       <div style="display:flex;align-items:center;gap:10px;margin-top:12px;">
         <button id="btnHeart" style="background:none;border:none;cursor:pointer;padding:6px;">
           <img id="imgHeart" src="${heartImg}" alt="Curtir" width="28" />

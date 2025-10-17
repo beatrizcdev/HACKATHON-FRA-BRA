@@ -3,6 +3,7 @@ header{
     width: 100%;
     box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
     background-color: rgb(255, 255, 255);
+    position: relative;
     
 }
 
@@ -23,5 +24,8 @@ header{
 }
 
 #foto-perfil{
-    margin-left: 900px;
+    display: flex;
+    position: absolute;
+    right: 20px;
+    top: 20px;
 }
