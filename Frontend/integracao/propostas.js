@@ -84,3 +84,31 @@ document.addEventListener('DOMContentLoaded', () => {
 
   loadPropostasGerais()
 })
+
+// ===========================================
+// CURTIDA DO CORAÇÃO
+// ===========================================
+document.addEventListener("DOMContentLoaded", () => {
+  const botao = document.getElementById("coracao");
+  const img = document.getElementById("imgCoracao");
+
+  if (!botao || !img) {
+    console.warn("Botão de curtida não encontrado no DOM.");
+    return;
+  }
+
+  let curtido = false;
+
+  botao.addEventListener("click", () => {
+    curtido = !curtido; // alterna o estado
+
+    // troca a imagem conforme o estado
+    img.src = curtido
+      ? "/Frontend/pictures/coracaoCurtido.png"
+      : "/Frontend/pictures/coracao.png";
+
+    // opcional: animação visual
+    botao.style.transform = "scale(1.2)";
+    setTimeout(() => (botao.style.transform = "scale(1)"), 150);
+  });
+});
