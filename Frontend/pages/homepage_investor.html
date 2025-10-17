@@ -74,7 +74,7 @@
 
           <label for="zona">Zona de investimento:</label>
           <select id="zona">
-            <option value="boa_viagem">Boa Viagem</option>
+    
             <option value="santo_antonio">Santo Antônio</option>
           </select>
 
@@ -92,9 +92,9 @@
       <section style="margin-top: 24px">
         <button
           id="btnAddProposta"
-          style="display: flex; align-items: center; justify-self: center; gap: 4px; padding: 20px 24px; border-radius: 30px; cursor: pointer; background-color:#EDC16A; color: #000; font-size: 20px; font-weight: bold; margin-top: 100px;  margin-bottom: 100px; " 
-        ><img src="../pictures/botaoAdd.png" alt="botão adicionar" id="imagem-add"style="height: 4vh;">
-          ADICIONAR NOVA PROPOSTA
+          style="padding: 10px 14px; border-radius: 6px; cursor: pointer"
+        >
+          Adicionar Proposta
         </button>
       </section>
     </main>
@@ -102,22 +102,25 @@
     <script>
       function calcularLucro() {
         const area = Number(document.getElementById("area").value);
-        const zona = document.getElementById("zona").value;
-        let valor_m2 = zona === "boa_viagem" ? 12000 : 9000; // exemplo
-
-        if (!area) {
+        if (!area || area <= 0) {
           alert("Informe a área do edifício!");
           return;
         }
 
-        const lucro = area * valor_m2 * 0.2; // supõe 20% de rentabilidade
-        const potencial = area * 1.5; // aumento do potencial construtivo
+        // regra: cada 1 m² retrofitado em Santo Antônio gera 3 m² de potencial construtivo em Boa Viagem
+        const potencialPorMetro = 3;
+        // lucro por m² de potencial construtivo em Boa Viagem (R$)
+        const lucroPorM2BV = 9575;
+
+        const potencial = area * potencialPorMetro;
+        const lucro = potencial * lucroPorM2BV;
 
         document.getElementById("resultado").style.display = "block";
         document.getElementById("resultado").innerHTML = `
-        💰 Lucro estimado: <strong>R$ ${lucro.toLocaleString()}</strong><br>
-        🏗️ Potencial construtivo: <strong>${potencial.toLocaleString()} m²</strong>
-      `;
+    Área retrofitada: <strong>${area.toLocaleString()}</strong> m²<br>
+    Potencial construtivo (em Boa Viagem): <strong>${potencial.toLocaleString()}</strong> m²<br>
+    💰 Lucro estimado: <strong>R$ ${lucro.toLocaleString()}</strong>
+  `;
       }
 
       // Modal de inserir proposta
@@ -140,31 +143,31 @@
           box.style =
             "background:#fff;padding:18px;border-radius:8px;max-width:520px;width:94%;box-shadow:0 8px 30px rgba(0,0,0,0.2);max-height:90vh;overflow:auto;";
           box.innerHTML = `
-          <button id="closeForm" aria-label="Fechar" style="float:right;border:none;background:none;font-size:18px;cursor:pointer;">✕</button>
-          <h2 style="margin-top:0">Nova Proposta</h2>
-          <form id="formProposta" style="display:flex;flex-direction:column;gap:8px;">
-            <label>Usos (título)</label>
-            <input name="usos" type="text" required placeholder="Ex: Centro cultural e biblioteca">
-            <label>Contrapartida</label>
-            <textarea name="contrapartida" rows="3" placeholder="Descreva a contrapartida" required></textarea>
-            <label>Fachada ativa</label>
-            <input type="checkbox" name="fachada_ativa">
-            <label>Tombamento</label>
-            <input type="checkbox" name="tombamento">
-            <label>Público</label>
-            <select name="publico" required>
-              <option value="">-- selecione --</option>
-              <option value="geral">Geral</option>
-              <option value="governo">Governo</option>
-            </select>
-            <label>Usuário (id) — opcional</label>
-            <input name="usuarioId" type="number" placeholder="Id do usuário (se aplicável)">
-            <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:8px;">
-              <button type="button" id="cancelForm" style="padding:8px 12px;">Cancelar</button>
-              <button type="submit" style="padding:8px 12px;">Salvar</button>
-            </div>
-          </form>
-        `;
+    <button type="button" id="closeForm" aria-label="Fechar" style="float:right;border:none;background:none;font-size:18px;cursor:pointer;">✕</button>
+    <h2 style="margin-top:0">Nova Proposta</h2>
+    <form id="formProposta" style="display:flex;flex-direction:column;gap:8px;">
+      <label>Usos (título)</label>
+      <input name="usos" type="text" required placeholder="Ex: Centro cultural e biblioteca">
+      <label>Contrapartida</label>
+      <textarea name="contrapartida" rows="3" placeholder="Descreva a contrapartida" required></textarea>
+      <label>Fachada ativa</label>
+      <input type="checkbox" name="fachada_ativa">
+      <label>Tombamento</label>
+      <input type="checkbox" name="tombamento">
+      <label>Público</label>
+      <select name="publico" required>
+        <option value="">-- selecione --</option>
+        <option value="geral">Geral</option>
+        <option value="governo">Governo</option>
+      </select>
+      <label>Usuário (id) — opcional</label>
+      <input name="usuarioId" type="number" placeholder="Id do usuário (se aplicável)">
+      <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:8px;">
+        <button type="button" id="cancelForm" style="padding:8px 12px;">Cancelar</button>
+        <button type="submit" style="padding:8px 12px;">Salvar</button>
+      </div>
+    </form>
+  `;
           overlay.appendChild(box);
           document.body.appendChild(overlay);
 

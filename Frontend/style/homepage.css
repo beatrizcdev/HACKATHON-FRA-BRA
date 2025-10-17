@@ -1,8 +1,68 @@
 .homepage_body {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  min-height: 100vh;
+  width: 100%;
 }
+
+/* container que divide aside + mapa */
+.homepage_content {
+  display: flex;
+  width: 100%;
+  flex: 1 1 auto;
+  gap: 0;
+}
+
+
+.homepage_aside {
+  width: 10%;
+  min-width: 220px; /* evita ficar muito pequeno em telas médias */
+  box-sizing: border-box;
+  padding: 16px;
+  background: transparent;
+  overflow: auto;
+}
+
+/* área principal (mapa) ocupa resto do espaço */
+.homepage_main {
+  flex: 1 1 auto;
+  width: 90%;
+  position: relative;
+  overflow: hidden;
+}
+
+/* fazer imagem ocupar toda a área restante */
+.homepage_main img,
+.mapa img {
+  width: 100%;
+  height: calc(100vh - 120px); /* ajusta considerando header + possível logo */
+  object-fit: cover;
+  display: block;
+}
+
+/* manter estilos anteriores da lista dentro do aside */
+.homepage_lista {
+  display: block;
+  margin-top: 0;
+}
+
+/* responsivo: em telas pequenas aside vira topo e mapa fica abaixo */
+@media (max-width: 900px) {
+  .homepage_content {
+    flex-direction: column;
+  }
+  .homepage_aside {
+    width: 100%;
+    min-width: 0;
+    padding: 12px;
+  }
+  .homepage_main img,
+  .mapa img {
+    height: auto;
+    max-height: calc(100vh - 200px);
+  }
+}
+
 /* CORES 
 -D3BC8F-amarelo
 -A97B86-vermelho
@@ -62,6 +122,7 @@ button {
   flex-direction: column;
   text-align: left;
   margin-top: 30px;
+  margin-left: 50px;
 }
 
 .homepage_lista h2{
@@ -90,3 +151,84 @@ button {
   border-radius: 3px;
   padding: 10px 30px;
 }
+
+/* container que divide aside + mapa */
+.homepage_content {
+  display: flex;
+  width: 100%;
+  height: calc(100vh - 80px); /* 80px considerando header */
+  position: relative;
+}
+
+/* aside fixo à esquerda */
+.homepage_aside {
+  width: 300px; /* ajusta conforme necessidade */
+  min-width: 220px;
+  height: 100%;
+  position: relative;
+  z-index: 2; /* acima do mapa */
+  background-color: rgba(255, 255, 255, 0.95);
+  padding: 16px;
+  overflow-y: auto;
+  box-shadow: 2px 0 6px rgba(0,0,0,0.1);
+}
+
+/* main (mapa) ocupa todo espaço restante atrás do aside */
+.homepage_main {
+  flex: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1; /* atrás do aside */
+  overflow: hidden;
+}
+
+/* mapa ocupa toda a área restante */
+.homepage_main img,
+.mapa img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.layout{
+  display: flex;
+  margin-top: 50px;
+}
+
+.mapa{
+  width: 50%;
+  margin-top: 50px;
+}
+
+/* responsivo: aside vira topo e mapa fica abaixo */
+@media (max-width: 900px) {
+  .homepage_content {
+    flex-direction: column;
+    height: auto;
+  }
+  .homepage_aside {
+    width: 100%;
+    height: auto;
+    position: relative;
+    box-shadow: none;
+  }
+  .homepage_main {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+    height: 300px;
+    z-index: 0;
+  }
+  .homepage_main img,
+  .mapa img {
+    height: 100%;
+    max-height: none;
+  }
+}
+
+

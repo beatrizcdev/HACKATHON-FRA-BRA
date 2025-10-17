@@ -148,5 +148,22 @@
       "criadoEm": "2025-10-17T01:59:03.445Z"
     }
   ],
-  "comentarios": []
+  "comentarios": [],
+  "feedbacks": [
+    {
+      "id_feedback": 1760668917957,
+      "propostaId": 1001,
+      "like": 18
+    },
+    {
+      "id_feedback": 1760669807388,
+      "propostaId": 1760666343445,
+      "like": 1
+    },
+    {
+      "id_feedback": 1760673049841,
+      "propostaId": 1002,
+      "like": 1
+    }
+  ]
 }
