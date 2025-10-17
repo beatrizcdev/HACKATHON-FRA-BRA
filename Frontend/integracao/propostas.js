@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
   async function loadPropostasGerais() {
     try {
       const res = await fetch(`${API_BASE}/propostas/gerais`);
-      if (!res.ok) throw new Error("Falha ao buscar propostas");
+      if (!res.ok) throw new Error("Falha ao carregar propostas");
       const propostas = await res.json();
       renderPropostas(propostas);
     } catch (err) {
@@ -26,13 +26,10 @@ document.addEventListener("DOMContentLoaded", () => {
     propostas.forEach((p) => {
       const el = document.createElement("div");
       el.className = "homepage_proposta";
-      // Exibe título/uso e pequena linha de contrapartida
       el.innerHTML = `
-        <h3 class="hp_proposta_titulo">${escapeHtml(p.usos || "")}</h3>
-        <p class="hp_proposta_contrap">${escapeHtml(
-          (p.contrapartida || p.contrapartida || "").slice(0, 120)
-        )}${
-        (p.contrapartida || p.contrapartida || "").length > 120 ? "..." : ""
+        <h3>${escapeHtml(p.usos || "")}</h3>
+        <p>${escapeHtml((p.contrapartida || "").slice(0, 120))}${
+        (p.contrapartida || "").length > 120 ? "..." : ""
       }</p>
       `;
       el.addEventListener("click", () => openModal(p));
@@ -41,7 +38,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function openModal(proposta) {
-    // cria modal
     const overlay = document.createElement("div");
     overlay.className = "integracao_modal_overlay";
     overlay.style =
@@ -52,15 +48,15 @@ document.addEventListener("DOMContentLoaded", () => {
     box.style =
       "background:#fff;padding:20px;max-width:600px;width:90%;border-radius:8px;box-shadow:0 6px 30px rgba(0,0,0,0.2);max-height:80vh;overflow:auto;";
 
-    // não mostrar id_proposta nem publico
     const usos = escapeHtml(proposta.usos || "");
-    const contr = escapeHtml(
-      proposta.contrapartida || proposta.contrapartida || ""
-    );
+    const contr = escapeHtml(proposta.contrapartida || "");
     const fachada = proposta.fachada_ativa ? "Sim" : "Não";
     const tomb = proposta.tombamento ? "Sim" : "Não";
     const criadoEm = escapeHtml(proposta.criadoEm || "");
     const usuarioId = proposta.usuarioId ?? "";
+
+    const heartImg = "/Frontend/pictures/coracao.png";
+    const heartImgLiked = "/Frontend/pictures/coracao_curtido.png";
 
     box.innerHTML = `
       <button class="integracao_modal_close" style="float:right;background:none;border:none;font-size:18px;cursor:pointer;">✕</button>
@@ -70,22 +66,79 @@ document.addEventListener("DOMContentLoaded", () => {
       <p><strong>Tombamento:</strong> ${tomb}</p>
       <p><strong>Criado em:</strong> ${criadoEm}</p>
       <p><strong>Usuário (id):</strong> ${escapeHtml(String(usuarioId))}</p>
+      <div style="display:flex;align-items:center;gap:10px;margin-top:12px;">
+        <button id="btnHeart" style="background:none;border:none;cursor:pointer;padding:6px;">
+          <img id="imgHeart" src="${heartImg}" alt="Curtir" width="28" />
+        </button>
+        <span id="likeCount">Carregando...</span>
+      </div>
     `;
+
     overlay.appendChild(box);
     document.body.appendChild(overlay);
 
+    // O modal só fecha pelo botão X (não fecha ao clicar fora)
+    const closeBtn = box.querySelector(".integracao_modal_close");
     function close() {
       overlay.remove();
     }
-    overlay.addEventListener("click", (ev) => {
-      if (ev.target === overlay) close();
+    closeBtn.addEventListener("click", close);
+
+    const btnHeart = box.querySelector("#btnHeart");
+    const imgHeart = box.querySelector("#imgHeart");
+    const likeCountEl = box.querySelector("#likeCount");
+
+    // ler contador atual via GET (NÃO incrementa)
+    (async function loadLike() {
+      try {
+        const resp = await fetch(
+          `${API_BASE}/feedback/${proposta.id_proposta}`
+        );
+        if (resp.ok) {
+          const data = await resp.json();
+          likeCountEl.textContent = `${data.like} curtidas`;
+        } else {
+          likeCountEl.textContent = "";
+        }
+      } catch (e) {
+        likeCountEl.textContent = "";
+      }
+    })();
+
+    // só incrementa quando o usuário clicar no botão de coração
+    btnHeart.addEventListener("click", async (ev) => {
+      ev.preventDefault();
+      ev.stopPropagation(); // garante que o clique não propague para elementos externos
+      btnHeart.disabled = true;
+      try {
+        const resp = await fetch(`${API_BASE}/feedback/curtir`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ propostaId: proposta.id_proposta }),
+        });
+        if (!resp.ok) {
+          const err = await resp.json().catch(() => null);
+          alert(
+            "Erro ao curtir: " +
+              (err && err.error ? err.error : resp.statusText)
+          );
+          btnHeart.disabled = false;
+          return;
+        }
+        const data = await resp.json();
+        imgHeart.src = heartImgLiked;
+        likeCountEl.textContent = `${data.like} curtidas`;
+      } catch (err) {
+        console.error(err);
+        alert("Erro de conexão");
+        btnHeart.disabled = false;
+      } finally {
+        // manter o modal aberto; permitir novo clique caso queira
+        btnHeart.disabled = false;
+      }
     });
-    box
-      .querySelector(".integracao_modal_close")
-      .addEventListener("click", close);
   }
 
-  // simples escape para evitar XSS se dados não confiáveis
   function escapeHtml(str) {
     return String(str)
       .replace(/&/g, "&amp;")
@@ -95,5 +148,5 @@ document.addEventListener("DOMContentLoaded", () => {
       .replace(/'/g, "&#039;");
   }
 
-  loadPropostasGerais()
-})
+  loadPropostasGerais();
+});
