@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Perfil</title>
+    <link rel="stylesheet" href="../style.css">
+  </head>
+  <body class="investidorperfil_body">
+    <header></header>
+
+    <main class="investidorperfil_conteudo">
+      <section class="investidorperfil_header">
+        <h1 class="investidorperfil_nome">Beatriz Castro</h1>
+        <p class="investidorperfil_email">beatriz.castro@email.com</p>
+      </section>
+
+      <section class="investidorperfil_lista">
+        <h2>Minhas Propostas</h2>
+
+        <div class="investidorperfil_proposta">
+          <div class="investidorperfil_proposta_info">
+            <div class="investidorperfil_proposta_titulo">
+              Retrofit Edifício Atlântico
+            </div>
+            <div class="investidorperfil_proposta_detalhes">
+              Boa Viagem — 800m² — Lucro estimado: R$ 1.200.000
+            </div>
+          </div>
+          <button class="investidorperfil_btn_detalhes">Ver detalhes</button>
+        </div>
+
+        <div class="investidorperfil_proposta">
+          <div class="investidorperfil_proposta_info">
+            <div class="investidorperfil_proposta_titulo">
+              Edifício São Miguel
+            </div>
+            <div class="investidorperfil_proposta_detalhes">
+              Santo Antônio — 500m² — Lucro estimado: R$ 750.000
+            </div>
+          </div>
+          <button class="investidorperfil_btn_detalhes">Ver detalhes</button>
+        </div>
+      </section>
+
+      <div class="investidorperfil_relatorio">
+        <button onclick="gerarRelatorio()">📄 Gerar Relatório</button>
+      </div>
+    </main>
+
+    <script>
+      function gerarRelatorio() {
+        alert("Relatório gerado com sucesso! (em breve exporta em PDF 💾)");
+      }
+    </script>
+  </body>
+</html>

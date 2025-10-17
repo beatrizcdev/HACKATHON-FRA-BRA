@@ -1,0 +1,98 @@
+.investidorperfil_body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f8f8f8;
+  font-family: Arial, sans-serif;
+  color: #222;
+  min-height: 100vh;
+  padding-bottom: 60px;
+}
+
+.investidorperfil_conteudo {
+  width: 80%;
+  max-width: 1000px;
+  margin-top: 50px;
+}
+
+/* Cabeçalho do perfil */
+.investidorperfil_header {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  padding: 25px 30px;
+  margin-bottom: 40px;
+}
+
+.investidorperfil_nome {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #c50023;
+}
+
+.investidorperfil_email {
+  color: #555;
+  font-size: 1rem;
+  margin-top: 5px;
+}
+
+/* Listagem de propostas */
+.investidorperfil_lista {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  padding: 25px 30px;
+}
+
+.investidorperfil_lista h2 {
+  color: #c50023;
+  font-size: 1.4rem;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.investidorperfil_proposta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f6f6f6;
+  border-radius: 8px;
+  padding: 15px 20px;
+  margin-bottom: 12px;
+}
+
+.investidorperfil_proposta_info {
+  text-align: left;
+}
+
+.investidorperfil_proposta_titulo {
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.investidorperfil_proposta_detalhes {
+  font-size: 0.95rem;
+  color: #555;
+}
+
+/* Botão de gerar relatório */
+.investidorperfil_relatorio {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.investidorperfil_relatorio button {
+  background-color: #c50023;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 30px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.investidorperfil_relatorio button:hover {
+  background-color: #a0001c;
+}
