@@ -96,3 +96,17 @@
 .investidorperfil_relatorio button:hover {
   background-color: #a0001c;
 }
+
+.investidorperfil_btn_detalhes{
+  background-color: #EDC16A;
+  padding: 10px;
+  border-radius: 10px;
+  color: #251c00;
+  border: 1px solid #d9b64c;
+  cursor: pointer;
+}
+
+.investidorperfil_btn_detalhes:hover{
+  background-color: #edc16ae2;
+}
+

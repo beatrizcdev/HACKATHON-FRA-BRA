@@ -18,7 +18,7 @@
 .landpage_titulo {
   font-size: 2.2rem;
   font-weight: 600;
-  color: #C50023;
+  color: #A97B86;
   margin-bottom: 20px;
 }
 
@@ -48,7 +48,7 @@
 
 .landpage_beneficio::before {
   content: "✓";
-  color: #C50023;
+  color: #A97B86;
   font-weight: bold;
   position: absolute;
   left: -20px;
@@ -56,7 +56,7 @@
 
 .landpage_login_button {
   margin-top: 40px;
-  background-color: #C50023;
+  background-color:  #A97B86;
   color: white;
   border: none;
   border-radius: 8px;
@@ -67,5 +67,5 @@
 }
 
 .landpage_login_button:hover {
-  background-color: #a0001c;
+  background-color:  #A97B86;
 }

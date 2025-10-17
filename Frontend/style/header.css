@@ -1,6 +1,27 @@
 header{
     height: 50px;
-    min-width: 100%;
+    width: 100%;
     box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
     background-color: rgb(255, 255, 255);
+    
+}
+
+.botoesHeader{
+    text-decoration: none;
+    color:#12124A;
+    font-weight: bold;
+    font-size: 19px;
+
+}
+
+.botoesHeader:hover{
+    color:#1a1a5fe9;
+}
+
+#div-perfil{
+  display: flex;
+}
+
+#foto-perfil{
+    margin-left: 900px;
 }
