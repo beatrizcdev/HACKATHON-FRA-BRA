@@ -1,42 +1,71 @@
-.index_body {
+.landpage_body {
   display: flex;
-  justify-content: space-around;
+  flex-direction: column;
   align-items: center;
-
-  background: linear-gradient(rgba(215, 11, 11, 0.8), rgba(113, 6, 6, 0.8)),
-    url("../pictures/index_back_image.svg");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
+  font-family: Arial, sans-serif;
+  background-color: #f8f8f8;
+  color: #222;
+  min-height: 100vh;
 }
 
-.index_info,
-.index_logotipo {
-  align-content: center;
-  margin: 2%;
+.landpage_conteudo {
+  width: 80%;
+  max-width: 900px;
+  text-align: center;
+  margin-top: 80px;
 }
 
-.index_form{
-    background-color: white;
-    padding: 40px;
-    border-radius: 5px;
+.landpage_titulo {
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: #C50023;
+  margin-bottom: 20px;
 }
 
-.index_form_space{
-    margin: 10px;
-    display: flex;
-    flex-direction: column;
+.landpage_descricao {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  color: #444;
+  margin-bottom: 40px;
 }
 
-.index_form_space label{
-    font-weight: 300;
-    font-size: 15px;
-    margin: 10px 0px;
+.landpage_beneficios {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  padding: 30px;
+  text-align: left;
 }
 
-.index_form_space input{
-    background-color: white;
-    border: 1px solid rgba(0, 0, 0, 0.3);
-    border-radius: 5px;
-    padding: 5px;
+.landpage_beneficio {
+  font-size: 1rem;
+  padding-left: 10px;
+  position: relative;
+}
+
+.landpage_beneficio::before {
+  content: "✓";
+  color: #C50023;
+  font-weight: bold;
+  position: absolute;
+  left: -20px;
+}
+
+.landpage_login_button {
+  margin-top: 40px;
+  background-color: #C50023;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 30px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.landpage_login_button:hover {
+  background-color: #a0001c;
 }

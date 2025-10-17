@@ -1,57 +1,29 @@
 <!DOCTYPE html>
-<html lang="PT-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Homepage</title>
-    <link rel="stylesheet" href="/Frontend/style.css" />
-  </head>
-  <body class="homepage_body">
-    <header></header>
-    <img
-      class="homepage_logotipo"
-      src="/Frontend/pictures/logotipo.svg"
-      alt="logotipo"
-    />
-    <div class="homepage_options">
-      <form action="#" method="get" class="homepage_search_form">
-        <input
-          type="text"
-          name="search"
-          placeholder="Pesquisar..."
-          class="homepage_search_input"
-        />
-        <button type="submit" class="homepage_search_button">
-          <img src="/Frontend/pictures/homepage_lupa.svg" alt="lupa" />
-        </button>
-      </form>
-      <button type="button" class="homepage_add">
-        <img src="/Frontend/pictures/homepage_button_plus.svg" alt="" />
-      </button>
-    </div>
-    <section class="homepage_lista">
-      <h2>Produtos Cadastrados</h2>
-      <div class="homepage_lista_produtos">
-        <div class="homepage_proposta">
-          <span>aaaaaa</span>
-        </div>
-        <div class="homepage_proposta">
-          <span>aaaaaa</span>
-        </div>
-        <div class="homepage_proposta">
-          <span>aaaaaa</span>
-        </div>
-        <div class="homepage_proposta">
-          <span>aaaaaa</span>
-        </div>
-        <div class="homepage_proposta">
-          <span>aaaaaa</span>
-        </div>
-        <div class="homepage_proposta">
-          <span>aaaaaa</span>
-        </div>
-      </div>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landpage</title>
+    <link rel="stylesheet" href="./Frontend/style.css">
+</head>
+<body class="landpage_body">
+  <header></header> <!-- já configurado -->
+
+  <main class="landpage_conteudo">
+    <h1 class="landpage_titulo">Transforme o Centro, Ganhe com o Futuro</h1>
+    <p class="landpage_descricao">
+      Nosso objetivo é facilitar o investimento em retrofit e revitalização urbana.
+      Descubra como o <strong>Centro Vivo</strong> pode ajudar você a investir de forma simples e vantajosa.
+    </p>
+
+    <section class="landpage_beneficios">
+      <div class="landpage_beneficio">Desburocratização do processo de investimento</div>
+      <div class="landpage_beneficio">Análises de mercado e zoneamento em tempo real</div>
+      <div class="landpage_beneficio">Retorno financeiro aliado ao impacto social</div>
     </section>
-    <script src="/Frontend/integracao/propostas.js" type="module"></script>
-  </body>
+
+    <button class="landpage_login_button">Entrar / Login</button>
+  </main>
+</body>
+
 </html>

@@ -1,7 +1,7 @@
 import express from 'express'
 import cors from 'cors'
 import cookieParser from 'cookie-parser';
-import rotas from '../rotas.js' // <-- extensão obrigatória para ESM
+import rotas from '../rotas.js'
 
 const app = express()
 
