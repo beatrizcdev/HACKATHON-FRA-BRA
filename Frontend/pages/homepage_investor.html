@@ -73,7 +73,7 @@
 
           <label for="zona">Zona de investimento:</label>
           <select id="zona">
-            <option value="boa_viagem">Boa Viagem</option>
+    
             <option value="santo_antonio">Santo Antônio</option>
           </select>
 
@@ -98,22 +98,25 @@
     <script>
       function calcularLucro() {
         const area = Number(document.getElementById("area").value);
-        const zona = document.getElementById("zona").value;
-        let valor_m2 = zona === "boa_viagem" ? 12000 : 9000; // exemplo
-
-        if (!area) {
+        if (!area || area <= 0) {
           alert("Informe a área do edifício!");
           return;
         }
 
-        const lucro = area * valor_m2 * 0.2; // supõe 20% de rentabilidade
-        const potencial = area * 1.5; // aumento do potencial construtivo
+        // regra: cada 1 m² retrofitado em Santo Antônio gera 3 m² de potencial construtivo em Boa Viagem
+        const potencialPorMetro = 3;
+        // lucro por m² de potencial construtivo em Boa Viagem (R$)
+        const lucroPorM2BV = 9575;
+
+        const potencial = area * potencialPorMetro;
+        const lucro = potencial * lucroPorM2BV;
 
         document.getElementById("resultado").style.display = "block";
         document.getElementById("resultado").innerHTML = `
-        💰 Lucro estimado: <strong>R$ ${lucro.toLocaleString()}</strong><br>
-        🏗️ Potencial construtivo: <strong>${potencial.toLocaleString()} m²</strong>
-      `;
+    Área retrofitada: <strong>${area.toLocaleString()}</strong> m²<br>
+    Potencial construtivo (em Boa Viagem): <strong>${potencial.toLocaleString()}</strong> m²<br>
+    💰 Lucro estimado: <strong>R$ ${lucro.toLocaleString()}</strong>
+  `;
       }
 
       // Modal de inserir proposta
