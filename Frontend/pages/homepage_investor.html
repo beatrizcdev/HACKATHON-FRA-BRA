@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage_investidor</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body class="investidor_body">
+  <header></header>
+
+  <main class="investidor_conteudo">
+    <h1 class="investidor_titulo">Edital de Retrofit — Invista e Lucre</h1>
+    <p class="investidor_descricao">
+      O programa <strong>Centro Vivo</strong> incentiva a revitalização urbana em áreas como <strong>Boa Viagem</strong> e Santo Antônio.
+      Ao investir em retrofit, você recebe benefícios fiscais, valorização imobiliária e retorno econômico sustentável.
+    </p>
+
+    <section class="investidor_beneficios">
+      <div class="investidor_beneficio">Isenção de IPTU e incentivos fiscais</div>
+      <div class="investidor_beneficio">Aproveitamento máximo do potencial construtivo</div>
+      <div class="investidor_beneficio">Acesso facilitado a linhas de crédito e programas públicos</div>
+      <div class="investidor_beneficio">Aumento direto no valor de mercado do imóvel</div>
+    </section>
+
+    <section class="investidor_calculadora">
+      <h2>Calcule seu Lucro Potencial</h2>
+      <form class="investidor_form" id="formLucro">
+        <label for="area">Área do edifício (m²):</label>
+        <input type="number" id="area" placeholder="Ex: 500">
+
+        <label for="zona">Zona de investimento:</label>
+        <select id="zona">
+          <option value="boa_viagem">Boa Viagem</option>
+          <option value="santo_antonio">Santo Antônio</option>
+        </select>
+
+        <button type="button" onclick="calcularLucro()">Calcular</button>
+      </form>
+
+      <div id="resultado" class="investidor_resultado" style="display:none;"></div>
+    </section>
+  </main>
+
+  <script>
+    function calcularLucro() {
+      const area = Number(document.getElementById('area').value);
+      const zona = document.getElementById('zona').value;
+      let valor_m2 = zona === 'boa_viagem' ? 12000 : 9000; // exemplo
+
+      if (!area) {
+        alert('Informe a área do edifício!');
+        return;
+      }
+
+      const lucro = area * valor_m2 * 0.2; // supõe 20% de rentabilidade
+      const potencial = area * 1.5; // aumento do potencial construtivo
+
+      document.getElementById('resultado').style.display = 'block';
+      document.getElementById('resultado').innerHTML = `
+        💰 Lucro estimado: <strong>R$ ${lucro.toLocaleString()}</strong><br>
+        🏗️ Potencial construtivo: <strong>${potencial.toLocaleString()} m²</strong>
+      `;
+    }
+  </script>
+</body>
+
+</html>

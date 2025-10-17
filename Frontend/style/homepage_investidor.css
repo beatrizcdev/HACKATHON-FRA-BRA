@@ -1,0 +1,117 @@
+.investidor_body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f8f8f8;
+  font-family: Arial, sans-serif;
+  color: #222;
+  min-height: 100vh;
+}
+
+.investidor_conteudo {
+  width: 80%;
+  max-width: 1000px;
+  text-align: center;
+  margin-top: 60px;
+}
+
+/* Título e descrição do edital */
+.investidor_titulo {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #C50023;
+  margin-bottom: 15px;
+}
+
+.investidor_descricao {
+  font-size: 1.1rem;
+  color: #444;
+  line-height: 1.6;
+  margin-bottom: 40px;
+}
+
+/* Caixa de benefícios */
+.investidor_beneficios {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  text-align: left;
+}
+
+.investidor_beneficio {
+  font-size: 1rem;
+  padding-left: 10px;
+  position: relative;
+}
+
+.investidor_beneficio::before {
+  content: "✓";
+  color: #C50023;
+  font-weight: bold;
+  position: absolute;
+  left: -20px;
+}
+
+/* Mini formulário de cálculo */
+.investidor_calculadora {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  margin-top: 40px;
+  padding: 30px;
+  width: 80%;
+  text-align: left;
+}
+
+.investidor_calculadora h2 {
+  color: #C50023;
+  margin-bottom: 15px;
+  font-size: 1.3rem;
+  text-align: center;
+}
+
+.investidor_form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.investidor_form label {
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.investidor_form input {
+  border: 1px solid #aaa;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 1rem;
+}
+
+.investidor_form button {
+  background-color: #C50023;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 12px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.investidor_form button:hover {
+  background-color: #a0001c;
+}
+
+.investidor_resultado {
+  margin-top: 20px;
+  background-color: #f2f2f2;
+  padding: 15px;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  text-align: center;
+}
