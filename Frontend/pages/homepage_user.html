@@ -70,9 +70,25 @@
         </div>
       </div>
     </section>
-    <section class="mapa">
-      <img src="../pictures/bairro_santo_antonio.jpg" alt="mapa">
+    <section class="mapa" style="position:relative;">
+      <a href="./mapa.html" class="map-link" title="Abrir mapa" style="display:block;text-decoration:none;color:inherit;">
+        <img src="../pictures/bairro_santo_antonio.jpg" alt="mapa" style="width:100%;height:auto;display:block;border-radius:6px;" />
+        <button type="button" class="map-open-btn" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:#C50023;color:#fff;border:none;padding:10px 16px;border-radius:6px;cursor:pointer;font-weight:600;">
+          Abrir mapa
+        </button>
+      </a>
     </section>
+    <script>
+      // opção: também permitir clique na imagem para redirecionar (navegação já feita pelo <a>)
+      // aqui só evitamos comportamento inesperado caso queira interceptar analytics etc.
+      document.querySelectorAll('.map-link').forEach(link => {
+        link.addEventListener('click', (e) => {
+          // ex: enviar evento de analytics
+          // console.log('Usuário abriu o mapa');
+          // navegação seguirá pelo href do link
+        });
+      });
+    </script>
     </div>
     <script src="/Frontend/integracao/propostas.js" type="module"></script>
   </body>

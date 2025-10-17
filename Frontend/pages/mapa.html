@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mapa 3D - OSMBuildings</title>
+  <link href="https://cdn.osmbuildings.org/4.1.1/OSMBuildings.css" rel="stylesheet">
+  <script src="https://cdn.osmbuildings.org/4.1.1/OSMBuildings.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      font-family: sans-serif;
+    }
+
+    #map {
+      width: 100vw;
+      height: 100vh;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    #sidebar {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 350px;
+      height: 100vh;
+      background-color: rgba(255, 255, 255, 0.9);
+      box-shadow: -2px 0 5px rgba(0,0,0,0.2);
+      padding: 20px;
+      box-sizing: border-box;
+      overflow-y: auto;
+      transform: translateX(100%);
+      transition: transform 0.3s ease-in-out;
+      z-index: 1000;
+    }
+
+    #sidebar.open {
+      transform: translateX(0);
+    }
+
+    #sidebar h2 {
+      margin-top: 0;
+      color: #333;
+    }
+
+    #sidebar label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+      color: #555;
+    }
+
+    #sidebar input[type="text"],
+    #sidebar input[type="number"] {
+      width: calc(100% - 20px);
+      padding: 8px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    #sidebar input[type="checkbox"] {
+      margin-top: 5px;
+    }
+
+    #sidebar .section {
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #eee;
+    }
+
+    #sidebar .section:last-child {
+      border-bottom: none;
+    }
+
+    .no-building-selected {
+      color: #777;
+      text-align: center;
+      margin-top: 50px;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="map"></div>
+  <div id="sidebar">
+    <div id="sidebar-content">
+      <p class="no-building-selected">Clique em um edifício no mapa para ver seus detalhes.</p>
+    </div>
+  </div>
+
+  <script>
+    // === Inicialização do mapa ===
+    const map = new OSMBuildings({
+      container: 'map',
+      position: { latitude: -8.063611, longitude: -34.878056 }, // Recife
+      zoom: 16,
+      minZoom: 15,
+      maxZoom: 20,
+      tilt: 40,
+      rotation: 300,
+      effects: ['shadows'],
+      attribution: '© Dados <a href="https://openstreetmap.org/copyright/">OpenStreetMap</a> © Mapa <a href="https://mapbox.com/">Mapbox</a> © 3D <a href="https://osmbuildings.org/copyright/">OSM Buildings</a>'
+    });
+
+    map.addMapTiles('https://tile-a.openstreetmap.fr/hot/{z}/{x}/{y}.png');
+    map.addGeoJSONTiles('https://{s}.data.osmbuildings.org/0.2/59fcc2e8/tile/{z}/{x}/{y}.json');
+
+    // === Variáveis globais ===
+    let selectedBuildingId = null;
+    let highlightLayer = null;
+    const sidebar = document.getElementById('sidebar');
+    const sidebarContent = document.getElementById('sidebar-content');
+
+    // === Mock de dados ===
+    const mockBuildingData = {
+      "way/24870500": {
+        id: "ESIG-001",
+        areaConstruida: 1500,
+        zona: "Zona A",
+        numeroPavimentos: 5,
+        uso: "Residencial",
+        ocioso: false,
+        potencialConstrutivo: 200
+      },
+      "way/24870501": {
+        id: "ESIG-002",
+        areaConstruida: 800,
+        zona: "Zona B",
+        numeroPavimentos: 3,
+        uso: "Comercial",
+        ocioso: true,
+        potencialConstrutivo: 50
+      },
+      "way/24870502": {
+        id: "ESIG-003",
+        areaConstruida: 2500,
+        zona: "Zona C",
+        numeroPavimentos: 10,
+        uso: "Misto",
+        ocioso: false,
+        potencialConstrutivo: 500
+      }
+    };
+
+    // === Cálculo do VGV ===
+    function calculateVGV(areaConstruida, potencialConstrutivo) {
+      return (areaConstruida * 5000) + (potencialConstrutivo * 10000);
+    }
+
+    // === Renderização do Sidebar ===
+    function renderSidebar(building) {
+      if (!building) {
+        sidebarContent.innerHTML = '<p class="no-building-selected">Clique em um edifício no mapa para ver seus detalhes.</p>';
+        sidebar.classList.remove('open');
+        return;
+      }
+
+      sidebar.classList.add('open');
+      let currentBuildingState = { ...building };
+
+      const updateVGV = () => {
+        const vgv = calculateVGV(currentBuildingState.areaConstruida, currentBuildingState.potencialConstrutivo);
+        document.getElementById('vgv-potencial').textContent = vgv.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+      };
+
+      sidebarContent.innerHTML = `
+        <h2>Detalhes do Edifício</h2>
+        <div class="section">
+          <p><strong>ID (ESIG):</strong> ${currentBuildingState.id}</p>
+          <p><strong>Área Construída:</strong> ${currentBuildingState.areaConstruida} m²</p>
+          <p><strong>Zona:</strong> ${currentBuildingState.zona}</p>
+
+          <label for="num-pavimentos">Número de Pavimentos:</label>
+          <input type="number" id="num-pavimentos" value="${currentBuildingState.numeroPavimentos}">
+
+          <label for="uso">Uso:</label>
+          <input type="text" id="uso" value="${currentBuildingState.uso}">
+
+          <label for="ocioso">Ocioso:</label>
+          <input type="checkbox" id="ocioso" ${currentBuildingState.ocioso ? 'checked' : ''}>
+
+          <label for="potencial-construtivo">Potencial Construtivo:</label>
+          <input type="number" id="potencial-construtivo" value="${currentBuildingState.potencialConstrutivo}">
+
+          <p><strong>VGV Potencial:</strong> <span id="vgv-potencial"></span></p>
+        </div>
+      `;
+
+      // Eventos
+      document.getElementById('num-pavimentos').addEventListener('input', e => {
+        currentBuildingState.numeroPavimentos = parseInt(e.target.value) || 0;
+      });
+      document.getElementById('uso').addEventListener('input', e => {
+        currentBuildingState.uso = e.target.value;
+      });
+      document.getElementById('ocioso').addEventListener('change', e => {
+        currentBuildingState.ocioso = e.target.checked;
+      });
+      document.getElementById('potencial-construtivo').addEventListener('input', e => {
+        currentBuildingState.potencialConstrutivo = parseInt(e.target.value) || 0;
+        updateVGV();
+      });
+
+      updateVGV();
+    }
+
+    // === Clique no mapa ===
+    map.on('click', function(e) {
+      if (e.feature) {
+        const buildingId = e.feature.id;
+        const buildingData = mockBuildingData[buildingId];
+
+        // Remove highlight anterior
+        if (highlightLayer) {
+          map.removeLayer(highlightLayer);
+          highlightLayer = null;
+        }
+
+        if (buildingData) {
+          selectedBuildingId = buildingId;
+
+          // Cria uma camada destacada (amarela) sobre o edifício clicado
+          highlightLayer = map.addGeoJSON({
+            type: 'FeatureCollection',
+            features: [{
+              type: 'Feature',
+              geometry: e.feature.geometry,
+              properties: { color: '#ffcc00' }
+            }]
+          });
+
+          renderSidebar(buildingData);
+        } else {
+          selectedBuildingId = null;
+          renderSidebar(null);
+        }
+
+      } else {
+        // Clicou no fundo do mapa
+        if (highlightLayer) {
+          map.removeLayer(highlightLayer);
+          highlightLayer = null;
+        }
+        selectedBuildingId = null;
+        renderSidebar(null);
+      }
+    });
+  </script>
+</body>
+</html>
